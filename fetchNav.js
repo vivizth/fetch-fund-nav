@@ -16,11 +16,11 @@ const url = 'https://codequiz.azurewebsites.net/';
     await page.waitForSelector('table');
 
     const nav = await page.evaluate((fund) => {
-        const foundFund = Array.from(document.querySelectorAll('table tr td')).find(td => td.textContent === fund);
+        const foundFund = Array.from(document.querySelectorAll('table tr td')).find(td => td.textContent.trim() === fund.trim());
         if (foundFund) {
             return foundFund.nextElementSibling.innerText;
         } else {
-            return 'Fund Not found'
+            return 'NAV Not found'
         }
     }, fundCode);
     console.log(`NAV : ${nav}`);
